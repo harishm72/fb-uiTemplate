@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../styles/App.css';
 
 class LikeButton extends Component{
 
-    constructor(props){
-        super(props)
-
-        this.state ={
-            isLiked : false
-        }
-    }
-    liked = (event) =>{
-        this.setState(prev => ({isLiked : !prev.isLiked}))
-    }
     render(){
-        let like = this.state.isLiked ? "Liked" : "Like"
+        let {isLiked} = this.props 
+        isLiked = isLiked ? "UnLike" : "Like";
+        let {id} = this.props
         return(
             <div>
                 {this.props.likes} Likes
-                <button className="like-button" onClick={this.liked}>{like}</button>
+                <button className="like-button" onClick={() => this.props.HandleLike(id)}>{isLiked}</button>
             </div>
         )
     }

@@ -1,0 +1,55 @@
+img{
+  max-width: 37.75em;
+}
+body{
+  background-color: #e9ebee;
+}
+.app-header{
+  background-color: #4267b2;
+  margin: 0 !important;
+  height: 54px;
+}
+h1{
+  margin: 0;
+}
+.app {
+  margin: 2em auto;
+  padding: 1em;
+  width: 40em;
+  border: 2px solid black;
+  border-radius: 4px;
+  background-color: azure;
+}
+.app select, label{
+  margin-left: 1em;
+}
+.post{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+}
+.post-type{
+  display: flex;
+  flex-direction: column;
+}
+.like-button:focus{
+  background-color: black;
+  color: white;
+}
+.comment{
+  border: 1px solid black;
+  padding-bottom: 0.5em;
+}
+.new-comment{
+  height: 2em;
+}
+.comment-input{
+  width: 99.5%;
+  height: 1.65em;
+  font-size: inherit;
+}
+.post-item{
+  border-radius: 4px;
+  border: 1px solid black;
+  margin: 1em;
+}

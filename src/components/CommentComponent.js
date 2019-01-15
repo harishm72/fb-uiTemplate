@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
 import Comment from './Comment';
-import NewComment from './Newcomment';
-import '../App.css';
+import NewComment from './NewComment';
+import '../styles/App.css';
 
 class CommentComponent extends Component{
     render(){
         let comments = this.props.comments
+        
         return(
             <div>
                 <h3>Comments..</h3>
@@ -15,7 +16,7 @@ class CommentComponent extends Component{
                     <Comment comment={comment} index={index}/>
                     )
                 }
-                <NewComment />
+                <NewComment HandleComment={this.props.HandleComment} id ={this.props.id}/>
             </div>
         )
     }
