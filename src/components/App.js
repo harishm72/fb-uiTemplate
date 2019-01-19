@@ -30,23 +30,30 @@ class App extends Component {
     let value = event.target.value 
     this.setState({ OptionSelected : value })
   }
-  HandleLike = (id) =>{
-   this.setState({data :  this.state.data.map(post =>{
-    if(post.id === id){
-      post.isLiked = !post.isLiked;
-      post.likes = post.isLiked ? post.likes + 1 : post.likes -1
-    }
-    return post;
-  }) })
+  HandleLike = (id) => {
+    this.setState({
+      data: this.state.data.map(post => {
+        if (post.id === id) {
+          post.isLiked = !post.isLiked;
+          post.likes = post.isLiked ? post.likes + 1 : post.likes - 1
+        }
+        return post;
+      })
+    })
   }
 
-  HandleComment = (newComment , id) =>{
-    this.setState({data : this.state.data.map(post =>{
-      if(post.id === id){
-        post.comments.push({"comment":newComment[0], 'created_at' : newComment[1]})
-      }
-      return post
-    })})
+  HandleComment = (newComment, id) => {
+    this.setState({
+      data: this.state.data.map(post => {
+        if (post.id === id) {
+          post.comments.push({
+            "comment": newComment[0],
+            'created_at': newComment[1]
+          })
+        }
+        return post
+      })
+    })
   }
   
   render() {
