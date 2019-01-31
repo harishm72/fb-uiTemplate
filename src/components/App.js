@@ -34,8 +34,10 @@ class App extends Component {
     this.setState({
       data: this.state.data.map(post => {
         if (post.id === id) {
-          post.isLiked = !post.isLiked;
-          post.likes = post.isLiked ? post.likes + 1 : post.likes - 1
+          let newPost = {...post}
+          newPost.isLiked = !newPost.isLiked;
+          newPost.likes = newPost.isLiked ? newPost.likes + 1 : newPost.likes - 1
+          return newPost;
         }
         return post;
       })

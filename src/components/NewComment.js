@@ -21,7 +21,7 @@ class NewComment extends Component{
         return(
             <div className="new-comment">
                 <form onSubmit={this.SubmitComment}>
-                <input className="comment-input" value={this.state.comment} onChange={this.AddComment} placeholder="type a comment here...."></input>
+                    <input className="comment-input" value={this.state.comment} onChange={this.AddComment} placeholder="type a comment here...."></input>
                 </ form>
             </div>
         )

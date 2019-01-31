@@ -8,9 +8,7 @@ class NewsFeed extends Component{
     
         return(
             <div>
-                {posts.map((post) => {
-                    return <Post post={post} HandleLike={this.props.HandleLike} HandleComment={this.props.HandleComment} />
-                    })
+                {posts.map(post =>  <Post post={post} HandleLike={this.props.HandleLike} HandleComment={this.props.HandleComment} />)
                 } 
             </div>
         )

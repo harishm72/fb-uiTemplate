@@ -7,10 +7,10 @@ class Post extends Component{
         let post = this.props.post
         return(
             <div className="post-item">
-            <p>{JSON.stringify(post["item_description"])}</p>
-            {post['image'] ? <img src={post['image']} alt="" /> : null } 
-            <LikeButton likes={post.likes} isLiked={post.isLiked} HandleLike={this.props.HandleLike} id={post.id}/>
-            <CommentComponent comments={(post['comments'])} HandleComment={this.props.HandleComment} id={post.id}/>
+                <p>{JSON.stringify(post["item_description"])}</p>
+                {post['image'] ? <img src={post['image']} alt="" /> : null } 
+                <LikeButton likes={post.likes} isLiked={post.isLiked} HandleLike={this.props.HandleLike} id={post.id}/>
+                <CommentComponent comments={(post['comments'])} HandleComment={this.props.HandleComment} id={post.id}/>
             </div>
         )
     }
