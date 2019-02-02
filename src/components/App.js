@@ -1,106 +1,68 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../styles/App.css';
 import Header from './Header';
 import NewsFeed from './NewsFeed';
+import { addComment, toggleLike, toggleOption, fetchPosts} from '../actions/index';
 
 class App extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
-      title : "facebook",
-      OptionSelected : "imageAndText",
-      data: []
+      title: "facebook",
+      data: this.props.data
     }
-    this.getData()
   }
-
-  getData = () => {
-    fetch('../data/NewsFeedData.json',
-    {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-   })
-    .then((res) => res.json())
-    .then(feedData => this.setState({data : [...this.state.data , ...feedData]}))
+  componentDidMount(){
+    this.props.fetchPosts()
   }
   ModifyContent = (event) => {
-    let value = event.target.value 
-    this.setState({ OptionSelected : value })
+    let modified = this.props.toggleOption(this.props.data, event.target.value)
+    this.setState({data : modified})
   }
+
   HandleLike = (id) => {
-    this.setState({
-      data: this.state.data.map(post => {
-        if (post.id === id) {
-          post.isLiked = !post.isLiked;
-          post.likes = post.isLiked ? post.likes + 1 : post.likes - 1
-        }
-        return post;
-      })
-    })
+    this.props.toggleLike(id)
   }
 
   HandleComment = (newComment, id) => {
-    this.setState({
-      data: this.state.data.map(post => {
-        if (post.id === id) {
-          post.comments.push({
-            "comment": newComment[0],
-            'created_at': newComment[1]
-          })
-        }
-        return post
-      })
-    })
+    this.props.addComment(newComment, id);
   }
-  
   render() {
-    let option = this.state.OptionSelected
-        let feedItems = [];
-        switch(option){
-            case "image":
-            feedItems = this.state.data.filter(post => post['image'])
-            break;
-
-            case "text":
-            feedItems = this.state.data.filter(post => !post['image']);
-            break;
-
-            case "none":
-            feedItems = [];
-            break;
-
-            default:
-            feedItems = this.state.data
-            break;
-        }
-
+    if(this.props.data){ 
     return (
       <div>
         <div className="app-header">
-        <Header title={this.state.title}/>
+          <Header title={this.props.title} />
         </div>
-     
-      <div className="app">
-      <label>
-        Select-type
-        <select defaultValue="imageAndText"  onChange={this.ModifyContent} className="post-type">
-          <option value="text" >Text Only</option>
-          <option value = "image" >Image Only</option>
-          <option  value ="imageAndText" >Image and Text</option>
-          <option value="none" >No items</option>
-        </select>
-        </label>
-        <NewsFeed feed={feedItems} HandleLike={this.HandleLike} HandleComment={this.HandleComment}/>
-      </div>
+
+        <div className="app">
+          <label>
+            Select-type
+        <select onChange={this.ModifyContent} className="post-type">
+              <option value="imageAndText" >Image and Text</option>
+              <option value="text" >Text Only</option>
+              <option value="image" >Image Only</option>
+              <option value="none" >No items</option>
+            </select>
+          </label>
+          <NewsFeed feed={this.props.data} HandleLike={this.HandleLike} HandleComment={this.HandleComment} />
+        </div>
       </div>
     );
+    }
+    else return <p>no data</p>
   }
-  
 }
 
-
-
-export default App;
+const mapStateToProps = state => ({
+  data: state.posts
+})
+const mapDispatchToProps = dispatch => ({
+  addComment: (newComment, id) => dispatch(addComment(newComment, id)),
+  toggleLike: id => dispatch(toggleLike(id)),
+  toggleOption: (data, option) => dispatch(toggleOption(data, option)),
+  fetchPosts: () => dispatch(fetchPosts())
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);

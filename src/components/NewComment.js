@@ -11,10 +11,12 @@ class NewComment extends Component{
     }
     SubmitComment = (event) =>{
         let date = new Date();
-
         event.preventDefault();
+        
+        if(this.state.comment){
         this.props.HandleComment([this.state.comment, date.toString()], this.props.id)
         this.setState({comment : ""})
+        }
     }
     render(){
         

@@ -12,9 +12,9 @@ class CommentComponent extends Component{
             <div>
                 <h3>Comments..</h3>
                 {
-                    comments.map((comment, index) =>
-                    <Comment comment={comment} index={index}/>
-                    )
+                    comments.map((comment, index) => {
+                    return <Comment comment={comment} key={index}/>
+                    })
                 }
                 <NewComment HandleComment={this.props.HandleComment} id ={this.props.id}/>
             </div>

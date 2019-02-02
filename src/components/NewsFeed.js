@@ -5,11 +5,11 @@ import Post from './Post';
 class NewsFeed extends Component{
     render(){
         let posts = this.props.feed
-    
+       
         return(
             <div>
                 {posts.map((post) => {
-                    return <Post post={post} HandleLike={this.props.HandleLike} HandleComment={this.props.HandleComment} />
+                    return <Post key={post.id} post={post} HandleLike={this.props.HandleLike} HandleComment={this.props.HandleComment} />
                     })
                 } 
             </div>
