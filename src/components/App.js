@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import '../styles/App.css';
 import Header from './Header';
 import NewsFeed from './NewsFeed';
-import { addComment, toggleLike, toggleOption, fetchPosts} from '../actions/index';
+import { fetchPosts} from '../actions/index';
 
 class App extends Component {
 
@@ -11,43 +11,52 @@ class App extends Component {
     super(props)
     this.state = {
       title: "facebook",
-      data: this.props.data
+      option : "imageAndText"
     }
   }
   componentDidMount(){
     this.props.fetchPosts()
   }
   ModifyContent = (event) => {
-    let modified = this.props.toggleOption(this.props.data, event.target.value)
-    this.setState({data : modified})
-  }
-
-  HandleLike = (id) => {
-    this.props.toggleLike(id)
-  }
-
-  HandleComment = (newComment, id) => {
-    this.props.addComment(newComment, id);
+    this.setState({option : event.target.value})
   }
   render() {
-    if(this.props.data){ 
+    if(this.props.data){
+      let filteredFeed = []
+      switch (this.state.option) {
+        case "image":
+          filteredFeed =  this.props.data.filter(post => post['image'])
+          break;
+          
+        case "text":
+          filteredFeed =  this.props.data.filter(post => !post['image'])
+          break;
+
+        case 'none':
+          filteredFeed =  []
+          break;
+
+        default:
+          filteredFeed = this.props.data
+          break;
+      }
     return (
       <div>
         <div className="app-header">
-          <Header title={this.props.title} />
+          <Header title={this.state.title} />
         </div>
 
         <div className="app">
           <label>
             Select-type
-        <select onChange={this.ModifyContent} className="post-type">
+            <select onChange={this.ModifyContent} className="post-type">
               <option value="imageAndText" >Image and Text</option>
               <option value="text" >Text Only</option>
               <option value="image" >Image Only</option>
               <option value="none" >No items</option>
             </select>
           </label>
-          <NewsFeed feed={this.props.data} HandleLike={this.HandleLike} HandleComment={this.HandleComment} />
+          <NewsFeed feed={filteredFeed}/>
         </div>
       </div>
     );
@@ -60,9 +69,6 @@ const mapStateToProps = state => ({
   data: state.posts
 })
 const mapDispatchToProps = dispatch => ({
-  addComment: (newComment, id) => dispatch(addComment(newComment, id)),
-  toggleLike: id => dispatch(toggleLike(id)),
-  toggleOption: (data, option) => dispatch(toggleOption(data, option)),
   fetchPosts: () => dispatch(fetchPosts())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App);

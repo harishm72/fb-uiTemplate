@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
-
+import { connect } from 'react-redux';
+import { toggleLike} from '../actions/index';
 class LikeButton extends Component{
 
     render(){
@@ -10,10 +11,15 @@ class LikeButton extends Component{
         return(
             <div>
                 {this.props.likes} Likes
-                <button className="like-button" onClick={() => this.props.HandleLike(id)}>{isLiked}</button>
+                <button className="like-button" onClick={() => this.props.toggleLike(id)}>{isLiked}</button>
             </div>
         )
     }
 }
-
-export default LikeButton;
+const mapStateToProps = state => ({
+    data: state.posts
+  })
+const mapDispatchToProps = dispatch => ({
+    toggleLike: id => dispatch(toggleLike(id))
+  })
+export default connect(mapStateToProps, mapDispatchToProps)(LikeButton);

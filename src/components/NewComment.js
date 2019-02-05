@@ -1,4 +1,6 @@
 import React ,{Component} from 'react';
+import { connect } from 'react-redux';
+import { addComment } from '../actions/index';
 
 class NewComment extends Component{
 
@@ -14,7 +16,7 @@ class NewComment extends Component{
         event.preventDefault();
         
         if(this.state.comment){
-        this.props.HandleComment([this.state.comment, date.toString()], this.props.id)
+        this.props.addComment([this.state.comment, date.toString()], this.props.id)
         this.setState({comment : ""})
         }
     }
@@ -29,5 +31,10 @@ class NewComment extends Component{
         )
     }
 }
-
-export default NewComment;
+const mapStateToProps = state => ({
+    data: state.posts
+  })
+  const mapDispatchToProps = dispatch => ({
+    addComment: (newComment, id) => dispatch(addComment(newComment, id)),
+  })
+  export default connect(mapStateToProps, mapDispatchToProps)(NewComment);

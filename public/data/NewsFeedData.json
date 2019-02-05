@@ -1,7 +1,7 @@
 [
     {
     "id" : 1,
-    "isLiked" : false,
+    "isLiked" : true,
     "item_description": "Declare variables not wars!!",
     "image": "",
     "likes": 10,
@@ -17,7 +17,7 @@
   },
   {
     "id": 2,
-    "isLiked" : false,
+    "isLiked" : true,
     "item_description": "This is an item with an image",
     "image": "./images/post1.jpg",
     "likes": 20,

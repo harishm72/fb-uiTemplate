@@ -16,7 +16,7 @@ class CommentComponent extends Component{
                     return <Comment comment={comment} key={index}/>
                     })
                 }
-                <NewComment HandleComment={this.props.HandleComment} id ={this.props.id}/>
+                <NewComment  id ={this.props.id}/>
             </div>
         )
     }

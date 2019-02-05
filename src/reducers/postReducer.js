@@ -2,10 +2,12 @@
 const postReducer = (state = [], action) => {
 
     switch (action.type) {
+
         case 'FETCH_POSTS':
             return (
                 action.posts
             )
+        
         case 'TOGGLE_LIKE':
             return state.map(post => {
                 if (post.id === action.id) {
@@ -14,7 +16,7 @@ const postReducer = (state = [], action) => {
                         isLiked: !post.isLiked,
                         likes: post.isLiked ? post.likes - 1 : post.likes + 1
                     }
-                }
+                } 
                 return post;
             })
 
@@ -32,7 +34,23 @@ const postReducer = (state = [], action) => {
                 }
                 return post;
             })
-
+        case 'TOGGLE_OPTION':
+        console.log(action)
+        let temp = JSON.parse(JSON.stringify(state))
+        switch (action.option) {
+           
+            case "image":
+                return temp.filter(post => post['image'])
+    
+            case "text":
+                return temp.filter(post => !post['image'])
+    
+            case 'none':
+                return []
+    
+            default:
+                return state;
+        }
         default:
             return state;
     }
