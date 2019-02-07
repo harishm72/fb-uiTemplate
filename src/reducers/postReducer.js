@@ -34,23 +34,6 @@ const postReducer = (state = [], action) => {
                 }
                 return post;
             })
-        case 'TOGGLE_OPTION':
-        console.log(action)
-        let temp = JSON.parse(JSON.stringify(state))
-        switch (action.option) {
-           
-            case "image":
-                return temp.filter(post => post['image'])
-    
-            case "text":
-                return temp.filter(post => !post['image'])
-    
-            case 'none':
-                return []
-    
-            default:
-                return state;
-        }
         default:
             return state;
     }

@@ -7,12 +7,6 @@ export const toggleLike = id => ({
     type: 'TOGGLE_LIKE',
     id,
   })
-export const toggleOption = (currentState, option) =>({
-    type: 'TOGGLE_OPTION',
-    currentState,
-    option : option
-})
-
 export const fetchPosts = () => dispatch => {
     fetch('../data/NewsFeedData.json')
       .then(res => res.json())
