@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
+///import '../styles/App.css';
 import { connect } from 'react-redux';
 import { toggleLike} from '../actions/index';
 class LikeButton extends Component{

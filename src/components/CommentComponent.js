@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Comment from './Comment';
 import NewComment from './NewComment';
-import '../styles/App.css';
+//import '../styles/App.css';
 
 class CommentComponent extends Component{
     render(){

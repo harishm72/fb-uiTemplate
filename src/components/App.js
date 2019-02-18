@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/App.css';
+// import '../styles/App.css';
 import Header from './Header';
 import NewsFeed from './NewsFeed';
 import { fetchPosts} from '../actions/index';
 
-class App extends Component {
+export class App extends Component {
 
   constructor(props) {
     super(props)
