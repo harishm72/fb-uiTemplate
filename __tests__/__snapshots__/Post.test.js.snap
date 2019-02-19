@@ -1,0 +1,57 @@
+exports[`>>>Post --- Snapshot Rednders the Post Component 1`] = `
+<div
+  className="post-item">
+  <p>
+    Declare variables not wars!!
+  </p>
+  <div>
+    <p>
+      10
+       Likes
+    </p>
+    <button
+      className="like-button"
+      onClick={[Function]}>
+      Like
+    </button>
+  </div>
+  <div>
+    <h3>
+      Comments..
+    </h3>
+    <div
+      className="comment">
+      <p>
+        Well said, i agree.
+      </p>
+      <p
+        className="comment-time">
+        Created at : 
+        Fri May 11 2018 19:17:43 GMT+0530 (IST)
+      </p>
+    </div>
+    <div
+      className="comment">
+      <p>
+        Good one!
+      </p>
+      <p
+        className="comment-time">
+        Created at : 
+        Fri May 10 2018 15:23:36 GMT+0530 (IST)
+      </p>
+    </div>
+    <div
+      className="new-comment">
+      <form
+        onSubmit={[Function]}>
+        <input
+          className="comment-input"
+          onChange={[Function]}
+          placeholder="type a comment here...."
+          value="" />
+      </form>
+    </div>
+  </div>
+</div>
+`;

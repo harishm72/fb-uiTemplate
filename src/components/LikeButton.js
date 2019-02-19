@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../styles/App.css';
 
 class LikeButton extends Component{
 
@@ -9,7 +8,7 @@ class LikeButton extends Component{
         // let {id} = this.props
         return(
             <div>
-                {this.props.likes} Likes
+                <p>{this.props.likes} Likes</p>
                 <button className="like-button" onClick={() => this.props.HandleLike(id)}>{isLikedRenderText}</button>
             </div>
         )
