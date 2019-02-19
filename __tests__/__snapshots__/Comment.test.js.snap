@@ -1,0 +1,13 @@
+exports[`>>>Comment --- Snapshot Rednders the Comment Component 1`] = `
+<div
+  className="comment">
+  <p>
+    Well said, i agree.
+  </p>
+  <p
+    className="comment-time">
+    Created at : 
+    Fri May 11 2018 19:17:43 GMT+0530 (IST)
+  </p>
+</div>
+`;

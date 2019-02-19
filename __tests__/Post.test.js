@@ -46,9 +46,20 @@ describe('>>>Post --- Shallow Render REACT COMPONENTS', () => {
     it('has a "p" tag with value of item description', () => {
         expect(wrapper.find('p').get(0).props.children).toBe(post['item_description'])
     })
-    
+
     it('has a "p" tag with value displaying number of likes', () => {
         expect(wrapper.find('p').at(1)
             .equals(<p>{post['likes']} Likes</p>))
     })
+
+    it('has a "input" element to add comment', () => {
+        expect(wrapper.find('input').at(0)
+            .equals(<input className="comment-input"
+                value=""
+                onChange={() => null}
+                placeholder="type a comment here....">
+            </input>)
+        )
+    })
+
 });
