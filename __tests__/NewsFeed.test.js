@@ -3,6 +3,11 @@ import { shallow, mount } from 'enzyme';
 import NewsFeed from '../src/components/NewsFeed';
 import renderer from 'react-test-renderer'
 
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+ 
+Enzyme.configure({ adapter: new Adapter() });
+
 const feed = [
     {
     "id" : 1,

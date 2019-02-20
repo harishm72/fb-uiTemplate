@@ -3,6 +3,11 @@ import { shallow, mount } from 'enzyme';
 import Comment from '../src/components/Comment';
 import renderer from 'react-test-renderer'
 
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+ 
+Enzyme.configure({ adapter: new Adapter() });
+
 let comment = {
     "comment": "Well said, i agree.",
     "created_at": "Fri May 11 2018 19:17:43 GMT+0530 (IST)"

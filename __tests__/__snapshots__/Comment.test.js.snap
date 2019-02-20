@@ -1,11 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`>>>Comment --- Snapshot Rednders the Comment Component 1`] = `
 <div
-  className="comment">
+  className="comment"
+>
   <p>
     Well said, i agree.
   </p>
   <p
-    className="comment-time">
+    className="comment-time"
+  >
     Created at : 
     Fri May 11 2018 19:17:43 GMT+0530 (IST)
   </p>

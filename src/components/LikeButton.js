@@ -5,7 +5,6 @@ class LikeButton extends Component{
     render(){
         let {isLiked, id} = this.props 
         let isLikedRenderText = isLiked ? "UnLike" : "Like";
-        // let {id} = this.props
         return(
             <div>
                 <p>{this.props.likes} Likes</p>

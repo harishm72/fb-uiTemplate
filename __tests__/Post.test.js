@@ -1,8 +1,12 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Post from '../src/components/Post';
 import renderer from 'react-test-renderer'
-import { wrap } from 'module';
+
+import Enzyme from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+ 
+Enzyme.configure({ adapter: new Adapter() });
 
 const post = {
     "id": 1,
@@ -45,21 +49,6 @@ describe('>>>Post --- Shallow Render REACT COMPONENTS', () => {
 
     it('has a "p" tag with value of item description', () => {
         expect(wrapper.find('p').get(0).props.children).toBe(post['item_description'])
-    })
-
-    it('has a "p" tag with value displaying number of likes', () => {
-        expect(wrapper.find('p').at(1)
-            .equals(<p>{post['likes']} Likes</p>))
-    })
-
-    it('has a "input" element to add comment', () => {
-        expect(wrapper.find('input').at(0)
-            .equals(<input className="comment-input"
-                value=""
-                onChange={() => null}
-                placeholder="type a comment here....">
-            </input>)
-        )
     })
 
 });

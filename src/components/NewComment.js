@@ -6,14 +6,11 @@ class NewComment extends Component{
         comment : ""
     }
     AddComment = (event) =>{
-        let ChangedComment = event.target.value
-      this.setState(prev => ({comment : ChangedComment}))
+      this.setState(({comment : event.target.value}))
     }
     SubmitComment = (event) =>{
-        let date = new Date();
-
         event.preventDefault();
-        this.props.HandleComment([this.state.comment, date.toString()], this.props.id)
+        this.props.HandleComment([this.state.comment, Date().toString()], this.props.id)
         this.setState({comment : ""})
     }
     render(){
