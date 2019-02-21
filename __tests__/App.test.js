@@ -22,8 +22,12 @@ describe('>>>H O M E --- Shallow Render REACT COMPONENTS',()=>{
       wrapper = shallow(<App/>) 
   })
 
-  it('+++ render the DUMB component', () => {
+  it('+++ render the App component', () => {
      expect(wrapper.length).toEqual(1)
   });
   
+  it("renders header with h1 tag", () => {
+    // console.log(wrapper.debug())
+    expect(wrapper.find('Header').props().title).toEqual("facebook")
+  })
 });
