@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import '../styles/App.css';
 import Header from './Header';
 import NewsFeed from './NewsFeed';
-import { fetchPosts} from '../actions/index';
+import { fetchPosts} from '../store/actions';
 
 class App extends Component {
 

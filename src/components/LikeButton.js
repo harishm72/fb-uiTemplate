@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/App.css';
 import { connect } from 'react-redux';
-import { toggleLike} from '../actions/index';
+import { toggleLike} from '../store/actions';
 class LikeButton extends Component{
 
     render(){
