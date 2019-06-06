@@ -49,16 +49,21 @@ describe('add new Comment', () => {
         inputBox.simulate("change", { target: { value: "hello" } })
         expect(wrapper.find('input').at(0).props().value).toEqual("hello");
 
-        inputBox.simulate("change", { target: { value: "hello world" } })
-        expect(wrapper.find('input').at(0).props().value).toEqual("hello world");
+        inputBox.simulate("change", { target: { value: "hello" } })
+        expect(wrapper.find('input').at(0).props().value).toEqual("hello");
     })
 
     it('submit comment and clear input box', () => {
         const fakeEvent = { preventDefault: () => null };
         expect(wrapper.find('.comment-input').length).toBe(1);
         
+        let inputBox = wrapper.find('.comment-input')
+
+        inputBox.simulate("change", { target: { value: "hello" } })
+        expect(wrapper.find('input').at(0).props().value).toEqual("hello");
+        
         wrapper.find('form').at(0).simulate('submit', fakeEvent);
-        expect(wrapper.find('.comment-input').text()).toBe("");
+        expect(wrapper.find('input').at(0).props().value).toEqual("");
     });
 
 })
