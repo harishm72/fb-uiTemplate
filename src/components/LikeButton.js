@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
-import '../styles/App.css';
+import React from 'react';
 
-class LikeButton extends Component{
+const LikeButton = ({ isLiked, id, likes, HandleLike }) => {
 
-    render(){
-        let {isLiked, id} = this.props 
-        let isLikedRenderText = isLiked ? "UnLike" : "Like";
-        // let {id} = this.props
-        return(
-            <div>
-                {this.props.likes} Likes
-                <button className="like-button" onClick={() => this.props.HandleLike(id)}>{isLikedRenderText}</button>
-            </div>
-        )
+    const handleLike = () => {
+        HandleLike(id)
     }
+    return (
+        <div>
+            {likes} Likes
+                <button className="like-button" onClick={handleLike}>{isLiked ? "UnLike" : "Like"}</button>
+        </div>
+    )
 }
 
 export default LikeButton;

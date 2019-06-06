@@ -1,24 +1,23 @@
-import React ,{Component} from 'react';
+import React, { Component } from 'react';
 
-class NewComment extends Component{
+class NewComment extends Component {
 
     state = {
-        comment : ""
+        comment: ""
     }
-    AddComment = (event) =>{
+    AddComment = (event) => {
         let ChangedComment = event.target.value
-      this.setState(prev => ({comment : ChangedComment}))
+        this.setState({ comment: ChangedComment })
     }
-    SubmitComment = (event) =>{
+    SubmitComment = (event) => {
         let date = new Date();
 
         event.preventDefault();
         this.props.HandleComment([this.state.comment, date.toString()], this.props.id)
-        this.setState({comment : ""})
+        this.setState({ comment: "" })
     }
-    render(){
-        
-        return(
+    render() {
+        return (
             <div className="new-comment">
                 <form onSubmit={this.SubmitComment}>
                     <input className="comment-input" value={this.state.comment} onChange={this.AddComment} placeholder="type a comment here...."></input>

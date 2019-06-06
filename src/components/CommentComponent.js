@@ -1,24 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Comment from './Comment';
 import NewComment from './NewComment';
-import '../styles/App.css';
 
-class CommentComponent extends Component{
-    render(){
-        let comments = this.props.comments
-        
-        return(
-            <div>
-                <h3>Comments..</h3>
-                {
-                    comments.map((comment, index) =>
-                    <Comment comment={comment} index={index}/>
-                    )
-                }
-                <NewComment HandleComment={this.props.HandleComment} id ={this.props.id}/>
-            </div>
-        )
-    }
-}
+const CommentComponent = ({ comments, id, HandleComment }) => (
+    <div>
+        <h3>Comments..</h3>
+        {comments.map((comment, index) => <Comment comment={comment} index={index} />)}
+        <NewComment HandleComment={HandleComment} id={id} />
+    </div>
+)
+
 export default CommentComponent;
