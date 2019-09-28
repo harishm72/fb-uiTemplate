@@ -1,30 +1,26 @@
-import React, { Component } from 'react';
+import React, { useState } from "react";
 
-class NewComment extends Component {
+const NewComment = props => {
+  const [comment, setComment] = useState("");
 
-    state = {
-        comment: ""
-    }
-    AddComment = (event) => {
-        let ChangedComment = event.target.value
-        this.setState({ comment: ChangedComment })
-    }
-    SubmitComment = (event) => {
-        let date = new Date();
+  const submitComment = event => {
+    event.preventDefault();
+    props.HandleComment([comment, new Date().toUTCString()], props.id);
+    setComment("");
+  };
 
-        event.preventDefault();
-        this.props.HandleComment([this.state.comment, date.toString()], this.props.id)
-        this.setState({ comment: "" })
-    }
-    render() {
-        return (
-            <div className="new-comment">
-                <form onSubmit={this.SubmitComment}>
-                    <input className="comment-input" value={this.state.comment} onChange={this.AddComment} placeholder="type a comment here...."></input>
-                </ form>
-            </div>
-        )
-    }
-}
+  return (
+    <form className="new-comment" onSubmit={submitComment}>
+      <input
+        className="comment-input"
+        value={comment}
+        onChange={event => {
+          setComment(event.target.value);
+        }}
+        placeholder="type a comment here...."
+      />
+    </form>
+  );
+};
 
 export default NewComment;

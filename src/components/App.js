@@ -1,109 +1,105 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from "react";
 
-import Header from './Header';
-import NewsFeed from './NewsFeed';
-import '../styles/App.css';
+import Header from "./Header";
+import NewsFeed from "./NewsFeed";
+import "../styles/App.css";
 
-class App extends Component {
+const App = () => {
+  const [option, setOption] = useState("imageAndText");
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      title: "facebook",
-      OptionSelected: "imageAndText",
-      data: []
-    }
-    this.getData()
-  }
+  const [data, setData] = useState([]);
 
-  getData = () => {
-    fetch('../data/NewsFeedData.json',
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      })
-      .then((res) => res.json())
-      .then(feedData => this.setState({ data: [...this.state.data, ...feedData] }))
-  }
-  ModifyContent = (event) => {
-    let value = event.target.value
-    this.setState({ OptionSelected: value })
-  }
-  HandleLike = (id) => {
-    this.setState({
-      data: this.state.data.map(post => {
+  useEffect(() => {
+    fetch("../data/NewsFeedData.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(res => res.json())
+      .then(feedData => setData([...feedData]));
+  }, [])
+
+  const HandleLike = id => {
+    setData([
+      ...data.map(post => {
         if (post.id === id) {
-          let newPost = { ...post }
+          let newPost = { ...post };
           newPost.isLiked = !newPost.isLiked;
-          newPost.likes = newPost.isLiked ? newPost.likes + 1 : newPost.likes - 1
+          newPost.likes = newPost.isLiked
+            ? newPost.likes + 1
+            : newPost.likes - 1;
           return newPost;
         }
         return post;
       })
-    })
-  }
+    ]);
+  };
 
-  HandleComment = (newComment, id) => {
-    this.setState({
-      data: this.state.data.map(post => {
+  const HandleComment = (newComment, id) => {
+    setData([
+      ...data.map(post => {
         if (post.id === id) {
           post.comments.push({
-            "comment": newComment[0],
-            'created_at': newComment[1]
-          })
+            comment: newComment[0],
+            created_at: newComment[1]
+          });
         }
-        return post
+        return post;
       })
-    })
+    ]);
+  };
+
+  let feedItems = [];
+  console.log(option)
+  switch (option) {
+    case "image":
+      feedItems = [...data.filter(post => post["image"])];
+      break;
+
+    case "text":
+      feedItems = [...data.filter(post => !post["image"])];
+      break;
+
+    case "none":
+      feedItems = [];
+      break;
+
+    default:
+      feedItems = [...data];
+      break;
   }
 
-  render() {
-    let option = this.state.OptionSelected
-    let feedItems = [];
-    switch (option) {
-      case "image":
-        feedItems = this.state.data.filter(post => post['image'])
-        break;
-
-      case "text":
-        feedItems = this.state.data.filter(post => !post['image']);
-        break;
-
-      case "none":
-        feedItems = [];
-        break;
-
-      default:
-        feedItems = this.state.data
-        break;
-    }
-
-    return (
-      <div>
-        <div className="app-header">
-          <Header title={this.state.title} />
-        </div>
-
-        <div className="app">
-          <label>
-            Select-type
-        <select defaultValue="imageAndText" onChange={this.ModifyContent} className="post-type">
-              <option value="text" >Text Only</option>
-              <option value="image" >Image Only</option>
-              <option value="imageAndText" >Image and Text</option>
-              <option value="none" >No items</option>
-            </select>
-          </label>
-          <NewsFeed feed={feedItems} HandleLike={this.HandleLike} HandleComment={this.HandleComment} />
-        </div>
+  return (
+    <div>
+      <div className="app-header">
+        <Header />
       </div>
-    );
-  }
 
-}
-
-
+      <div className="app">
+        <label>
+          Select-type
+          <select
+            value={option}
+            onChange={event => {
+              setOption(event.target.value);
+            }}
+            className="post-type"
+          >
+            <option value="text">Text Only</option>
+            <option value="image">Image Only</option>
+            <option value="imageAndText">Image and Text</option>
+            <option value="none">No items</option>
+          </select>
+        </label>
+        <NewsFeed
+          feed={feedItems}
+          HandleLike={HandleLike}
+          HandleComment={HandleComment}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default App;

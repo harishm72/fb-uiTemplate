@@ -1,16 +1,19 @@
-import React from 'react';
+import React from "react";
 
 const LikeButton = ({ isLiked, id, likes, HandleLike }) => {
-
-    const handleLike = () => {
-        HandleLike(id)
-    }
-    return (
-        <div>
-            {likes} Likes
-                <button className="like-button" onClick={handleLike}>{isLiked ? "UnLike" : "Like"}</button>
-        </div>
-    )
-}
+  return (
+    <div>
+      {likes} Likes
+      <button
+        className="like-button"
+        onClick={() => {
+          HandleLike(id);
+        }}
+      >
+        {isLiked ? "UnLike" : "Like"}
+      </button>
+    </div>
+  );
+};
 
 export default LikeButton;
